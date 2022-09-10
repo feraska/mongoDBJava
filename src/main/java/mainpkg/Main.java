@@ -1,7 +1,11 @@
 package mainpkg;
+import com.google.api.core.ApiFuture;
 import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.firestore.Firestore;
+import com.google.cloud.firestore.QuerySnapshot;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
+import com.google.firebase.cloud.FirestoreClient;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.*;
 import org.bson.Document;
@@ -40,6 +44,11 @@ public class Main {
 
             FirebaseApp.initializeApp(options);
             System.out.println("connection succ");
+            Firestore firestore = FirestoreClient.getFirestore();
+            ApiFuture<QuerySnapshot> apiFuture=firestore.collection("users").get();
+            System.out.println(apiFuture.get().getDocuments().get(0).get("email"));
+            ApiFuture<QuerySnapshot> apiFuture1= firestore.collection("users").orderBy("email").get();
+            System.out.println(apiFuture1.get().getDocuments().size());
         }
         catch (Exception e){
             e.printStackTrace();
