@@ -1,10 +1,14 @@
 package mainpkg;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.*;
 import org.bson.Document;
+import java.io.FileInputStream;
 
 public class Main {
-    public void mongoDb(){
+    public static void mongoDb(){
         try {
 
             MongoClient mongoClient = MongoClients.create("mongodb+srv://feras:123@react-db.5elia.mongodb.net/?retryWrites=true&w=majority");
@@ -22,11 +26,27 @@ public class Main {
 
         }
     }
-    public void fireBase(){
+    public static void fireBase(){
+        try {
 
+            FileInputStream serviceAccount =
+                    new FileInputStream("serviceAccountKey.json");
+
+
+            FirebaseOptions options = new FirebaseOptions.Builder()
+                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .setDatabaseUrl("https://fir-21c88-default-rtdb.firebaseio.com")
+                    .build();
+
+            FirebaseApp.initializeApp(options);
+            System.out.println("connection succ");
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
     public static void main(String[] args) {
-
+        fireBase();
     }
 
 }
