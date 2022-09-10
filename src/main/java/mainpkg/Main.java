@@ -4,7 +4,7 @@ import com.mongodb.client.*;
 import org.bson.Document;
 
 public class Main {
-    public static void main(String[] args) {
+    public void mongoDb(){
         try {
 
             MongoClient mongoClient = MongoClients.create("mongodb+srv://feras:123@react-db.5elia.mongodb.net/?retryWrites=true&w=majority");
@@ -21,6 +21,12 @@ public class Main {
         catch (Exception e){
 
         }
+    }
+    public void fireBase(){
+
+    }
+    public static void main(String[] args) {
+
     }
 
 }
