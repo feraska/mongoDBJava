@@ -1,1 +1,1 @@
-*.json
+/src/main/java/mainpkg/serviceAccountKey.json
